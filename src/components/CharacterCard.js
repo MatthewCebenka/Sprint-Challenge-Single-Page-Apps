@@ -14,14 +14,14 @@ const Img = styled.img`
 `;
 
 export default function CharacterCard({ character }) {
-    const { image, name, species, gender} = character;
+    // const { image, name, species, gender} = character;
 
-    return (
-        <Card>
-            <Img src={image} />
-            <h3>{name}</h3>
-            <p>Species: {species}</p>
-            <p>Gender: {gender}</p>
-        </Card>
-    );
+    // return (
+    //     <Card>
+    //         <Img src={image} />
+    //         <h3>{name}</h3>
+    //         <p>Species: {species}</p>
+    //         <p>Gender: {gender}</p>
+    //     </Card>
+    // );
 }

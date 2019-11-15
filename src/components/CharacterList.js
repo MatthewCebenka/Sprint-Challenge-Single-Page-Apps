@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import CharacterCard from "./CharacterCard";
+// import CharacterCard from "./CharacterCard";
 import styled from "styled-components";
 
 const List = styled.div`
@@ -17,10 +17,21 @@ const Container = styled.div`
     text-align: center;
 `;
 
+const Card = styled.div`
+    border: solid 2px black;
+    width: 80%;
+    margin: 2rem;
+    padding: 2rem;
+`;
+
+const Img = styled.img`
+    width: 70%;
+    height: 50%;
+`;
+
+
 export default function CharacterList() {
-    // searchTerm will save the data from the search input on every occurance of the change event.
-    const [searchTerm, setSearchTerm] = useState("");
-    
+
     // TODO: Add useState to track data from useEffect
     const [characters, setCharacters] = useState([]);
     useEffect(() => {
@@ -30,7 +41,6 @@ export default function CharacterList() {
             axios
                 .get("https://rickandmortyapi.com/api/character/")
                 .then(response => {
-                    // console.log(response.data.results);
                     setCharacters(response.data.results);
                     console.log(response.data.results)
                 })
@@ -42,12 +52,33 @@ export default function CharacterList() {
     }, []);
 
     return (
+
         <Container>
+            
+            <form className="search">
+                <input
+                type="text"
+                // onChange={handleInputChange}
+                // value={query}
+                name="name"
+                tabIndex="0"
+                className="prompt search-name"
+                placeholder="search by name"
+                autoComplete="off"
+                />
+            </form>
+
             <List>
                 {characters.map(character => (
-                    <CharacterCard  character={character} />
+                    <Card  character={character} >
+                        <Img src={character.image} />
+                        <h3>{character.name}</h3>
+                        <p>Species: {character.species}</p>
+                        <p>Gender: {character.gender}</p>
+                    </Card>
                 ))}
             </List>
+
         </Container>
     );
 }
