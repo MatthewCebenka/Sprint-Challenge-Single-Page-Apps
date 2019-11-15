@@ -29,11 +29,11 @@ const Img = styled.img`
     height: 50%;
 `;
 
-
 export default function CharacterList() {
 
     // TODO: Add useState to track data from useEffect
     const [characters, setCharacters] = useState([]);
+    const [results, setResults] = useState();
     useEffect(() => {
         // TODO: Add API Request here - must run in `useEffect`
         //  Important: verify the 2nd `useEffect` parameter: the dependancies array!
@@ -42,29 +42,38 @@ export default function CharacterList() {
                 .get("https://rickandmortyapi.com/api/character/")
                 .then(response => {
                     setCharacters(response.data.results);
-                    console.log(response.data.results)
+                    // const submitHandler = e => {
+                    //     e.preventDefault();
+                    // }
+                    const filtered = response.data.filter(char => {
+                        return char.name.toLowerCase().indexOf(results.toLowerCase()) !== -1;
+                      });
+                      response.data.search(filtered);
+                      console.log(filtered);
                 })
                 .catch(error => {
                     console.error("NOPE", error);
                 });
-        };
+            };
         getCharacters();
-    }, []);
+    }, [results]);
 
+
+    const handleChanges = e => {
+        setResults(e.target.value);
+      };
+      
     return (
 
         <Container>
             
-            <form className="search">
+            <form onSubmit={submitHandler}>
                 <input
+                onChange={handleChanges}
                 type="text"
-                // onChange={handleInputChange}
-                // value={query}
-                name="name"
-                tabIndex="0"
-                className="prompt search-name"
-                placeholder="search by name"
-                autoComplete="off"
+                name="character"
+                id="character"
+                placeholder="Search"
                 />
             </form>
 
@@ -80,5 +89,5 @@ export default function CharacterList() {
             </List>
 
         </Container>
-    );
+    )
 }
