@@ -1,27 +1,30 @@
 import React from "react";
 import styled from "styled-components";
 
-const Card = styled.div`
-    border: solid 2px black;
-    width: 80%;
-    margin: 2rem;
-    padding: 2rem;
-`;
+export default function CharacterCard(props) {
+  const Card = styled.div`
+     display: flex;
+     flex-wrap: wrap;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     background-color: blue;
+     margin: 5% 20%
+     border-radius: 8px;
+     font-weight: 600;
+     font-size: 18px;
+     `;
 
-const Img = styled.img`
-    width: 70%;
-    height: 50%;
-`;
+  const Header = styled.h2`
+    font-size: 35px;
+  `;
 
-export default function CharacterCard({ character }) {
-    // const { image, name, species, gender} = character;
-
-    // return (
-    //     <Card>
-    //         <Img src={image} />
-    //         <h3>{name}</h3>
-    //         <p>Species: {species}</p>
-    //         <p>Gender: {gender}</p>
-    //     </Card>
-    // );
+  return (
+    <Card>
+      <Header>{props.name}</Header>
+      <img src={props.image} />
+      <p>Species: {props.species}</p>
+      <p>Status: {props.status}</p>
+    </Card>
+  );
 }
