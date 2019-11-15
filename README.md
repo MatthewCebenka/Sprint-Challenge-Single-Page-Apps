@@ -29,6 +29,12 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 > Answer:
 
+Client side routing allows for faster loading times. This is enabled
+through swapping different rendered components based on what events
+have taken place, instead of making a call to an api everytime a new
+component needs to be displayed.
+
+
 ## Project Set Up
 
 Follow these steps to set up and work on your project:
